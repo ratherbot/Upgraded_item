@@ -1,0 +1,18 @@
+{
+  "hard": [
+    "python", "java", "c#", "sql", "postgresql", "mongodb",
+    "machine learning", "ml", "deep learning",
+    "pytorch", "tensorflow", "scikit-learn",
+    "docker", "kubernetes", "git", "linux"
+  ],
+  "soft": [
+    "коммуникация", "работа в команде", "навыки презентации",
+    "тайм-менеджмент", "самоорганизация", "планирование"
+  ],
+  "tool": [
+    "jira", "confluence", "figma", "tableau", "power bi"
+  ],
+  "lang": [
+    "english", "английский", "upper-intermediate", "b2"
+  ]
+}
