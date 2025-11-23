@@ -1,5 +1,7 @@
 # src/config.py
 import os
+from dotenv import load_dotenv
+load_dotenv()  # подхватит .env из корня проекта
 
 HH_BASE_URL = "https://api.hh.ru"
 SJ_BASE_URL = "https://api.superjob.ru/2.0"

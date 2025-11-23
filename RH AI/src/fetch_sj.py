@@ -5,6 +5,8 @@ import json
 import requests
 from datetime import datetime
 from typing import List, Dict
+from dotenv import load_dotenv
+load_dotenv()  # подхватит .env из корня проекта
 
 SJ_BASE_URL = "https://api.superjob.ru/2.0"
 RAW_DIR = "data/raw"

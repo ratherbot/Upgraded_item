@@ -6,23 +6,56 @@ from src.normalise import normalize_hh, normalize_sj
 from src.extract_skills import extract_skills_from_vacancy
 from src.config import RAW_DIR, PROCESSED_DIR
 
+
+
+
 def load_raw_files(prefix: str):
-    pattern = os.path.join(RAW_DIR, f"{prefix}_*.json")
-    files = glob.glob(pattern)
+    print("\n[STEP] Загрузка файлов:", prefix)
+    print("[DEBUG] RAW_DIR =", RAW_DIR)
+
+    patterns = [
+        os.path.join(RAW_DIR, f"{prefix}_*.ndjson"),
+    ]
+
+    print("[DEBUG] Patterns:", patterns)
+
+    files = []
+    for p in patterns:
+        found = glob.glob(p)
+        print(f"[DEBUG] Проверяю {p} → найдено {len(found)} файлов")
+        files.extend(found)
+
     if not files:
         print(f"[WARN] Не найдено файлов с префиксом {prefix} в {RAW_DIR}")
         return []
+
+    print(f"[INFO] Найдено файлов: {files}")
+
     data = []
     for f in files:
         print(f"[INFO] Загружаю {f} ...")
         try:
-            with open(f, "r", encoding="utf-8") as fh:
-                chunk = json.load(fh)
-                data.extend(chunk)
+            if f.endswith(".ndjson"):
+                with open(f, "r", encoding="utf-8") as fh:
+                    for line in fh:
+                        line = line.strip()
+                        if not line:
+                            continue
+                        data.append(json.loads(line))
+            else:
+                with open(f, "r", encoding="utf-8") as fh:
+                    obj = json.load(fh)
+                    if isinstance(obj, dict):
+                        if "items" in obj: obj = obj["items"]
+                        if "objects" in obj: obj = obj["objects"]
+                    if isinstance(obj, list):
+                        data.extend(obj)
         except Exception as e:
             print(f"[ERROR] Ошибка чтения {f}: {e}")
-    print(f"[INFO] Загружено {len(data)} записей из {len(files)} файлов ({prefix})")
+
+    print(f"[INFO] Загружено {len(data)} записей ({prefix})\n")
     return data
+
 
 
 def process_all():
