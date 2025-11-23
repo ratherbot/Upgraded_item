@@ -2,12 +2,9 @@
 import json
 import glob
 import os
-from src.normalise import normalize_hh, normalize_sj
-from src.extract_skills import extract_skills_from_vacancy
-from src.config import RAW_DIR, PROCESSED_DIR
-
-
-
+from normalise import normalize_hh, normalize_sj
+from extract_skills import extract_skills_from_vacancy
+from config import RAW_DIR, PROCESSED_DIR
 
 def load_raw_files(prefix: str):
     print("\n[STEP] Загрузка файлов:", prefix)
