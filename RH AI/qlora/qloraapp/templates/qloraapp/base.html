@@ -4,7 +4,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Анализ вакансий</title>
+    <title>{% block title %}{% endblock %}</title>
     {% block stylesheet %}{% endblock %}
     <link rel="stylesheet" href="{% static 'qloraapp/css/base.css' %}">
 </head>
